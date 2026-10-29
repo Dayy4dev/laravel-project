@@ -1,19 +1,20 @@
 @php
-    $isActive = request()->is(ltrim($href, '/'));
+    $isActive = request()->fullUrlIs($href);
 @endphp
 
 <li>
     <a href="{{ $href }}"
+       @if ($isActive) aria-current="page" @endif
        @class([
            'flex items-center p-2 text-base font-medium rounded-lg transition duration-75 group',
-           'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white font-semibold' => $isActive,
+           'bg-gray-100 text-primary-600 dark:bg-gray-700 dark:text-primary-400 font-semibold' => $isActive,
            'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-white' => !$isActive
        ])
     >
         <svg aria-hidden="true"
              @class([
                  'flex-shrink-0 w-6 h-6 transition duration-75',
-                 'text-gray-900 dark:text-white' => $isActive,
+                 'text-primary-600 dark:text-primary-400' => $isActive,
                  'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' => !$isActive
              ])
              fill="currentColor"
